@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kebap Haus Bogen – Döner, Dürüm, Pizza &amp; mehr | Stadtplatz 27, Bogen</title>
+  <meta name="description" content="Kebap Haus Bogen am Stadtplatz 27: frischer Döner, Dürüm, Pizza, Lahmacun und Falafel. Jetzt anrufen und vorbestellen.">
+  <meta name="theme-color" content="#14100d">
+  <style>
+    :root{
+      --bg:#14100d; --bg2:#1d1712; --card:#241c16; --line:#3a2e24;
+      --text:#f6ede0; --muted:#cdbfae; --accent:#f5a524; --accent2:#e4572e; --ink:#1a1209;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:72px}
+    body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:1rem}
+    a{color:inherit}
+    :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+    .skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--ink);padding:.6rem 1rem;border-radius:8px;z-index:200;font-weight:700}
+    .skip:focus{left:8px}
+    .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 1.1rem}
+    section{padding:3.5rem 0}
+    h1,h2,h3{line-height:1.2}
+    h2{font-size:1.9rem;margin-bottom:.5rem}
+    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;margin-bottom:.4rem}
+    .lead{color:var(--muted);max-width:60ch;margin-bottom:1.6rem}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.75rem 1.4rem;border-radius:999px;font-weight:800;text-decoration:none;border:2px solid transparent;cursor:pointer;font-size:1rem;font-family:inherit}
+    .btn-primary{background:var(--accent);color:var(--ink)}
+    .btn-primary:hover{background:#ffb93f}
+    .btn-ghost{border-color:var(--text);color:var(--text);background:transparent}
+    .btn-ghost:hover{background:rgba(255,255,255,.08)}
+    .btn-danger{border-color:#ff8a80;color:#ff8a80;background:transparent;min-height:44px;padding:.4rem 1rem;font-size:.95rem}
+    .btn-danger:hover{background:rgba(255,138,128,.12)}
+
+    /* Header */
+    header{position:sticky;top:0;z-index:100;background:rgba(20,16,13,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+    .bar{display:flex;align-items:center;justify-content:space-between;gap:.6rem;min-height:64px}
+    .logo{font-weight:900;font-size:1.15rem;text-decoration:none;letter-spacing:.02em}
+    .logo span{color:var(--accent)}
+    nav ul{list-style:none;display:none}
+    nav a{text-decoration:none;color:var(--muted);font-weight:600;padding:.5rem .3rem}
+    nav a:hover{color:var(--text)}
+    .head-actions{display:flex;align-items:center;gap:.5rem}
+    .head-actions .btn{min-height:44px;padding:.5rem 1rem;font-size:.95rem}
+    .burger{width:44px;height:44px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--text);font-size:1.4rem;cursor:pointer}
+    nav.open ul{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:64px;background:var(--bg2);padding:.8rem 1.1rem 1.2rem;border-bottom:1px solid var(--line)}
+    nav.open li a{display:block;padding:.8rem 0;font-size:1.1rem;border-bottom:1px solid var(--line)}
+
+    /* Hero */
+    .hero{padding:3rem 0 3.5rem;background:radial-gradient(900px 400px at 80% -10%,rgba(245,165,36,.22),transparent 60%),radial-gradient(700px 400px at -10% 110%,rgba(228,87,46,.20),transparent 60%),var(--bg)}
+    .hero h1{font-size:2.3rem;margin-bottom:1rem}
+    .hero h1 em{font-style:normal;color:var(--accent)}
+    .hero p{color:var(--muted);font-size:1.1rem;max-width:52ch;margin-bottom:1.6rem}
+    .cta{display:flex;flex-direction:column;gap:.8rem}
+    .status{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.4rem;font-weight:700;background:var(--card);border:1px solid var(--line);padding:.5rem .9rem;border-radius:999px;font-size:.95rem}
+    .dot{width:10px;height:10px;border-radius:50%;background:#888}
+    .status.open .dot{background:#3ecf6e}
+    .status.closed .dot{background:#ef5350}
+    .badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.4rem;list-style:none}
+    .badges li{font-size:.9rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem}
+
+    /* Menü */
+    #menue{background:var(--bg2)}
+    .tabs{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.6rem;margin-bottom:1.2rem;scrollbar-width:thin}
+    .tab{flex:0 0 auto;min-height:44px;padding:.5rem 1.1rem;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-weight:700;cursor:pointer;font-family:inherit;font-size:.95rem}
+    .tab[aria-pressed="true"]{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+    .grid{display:grid;gap:.9rem;grid-template-columns:1fr}
+    .item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem 1.1rem;display:flex;gap:.9rem}
+    .item[hidden]{display:none}
+    .ico{font-size:1.8rem;line-height:1}
+    .item h3{font-size:1.05rem;display:flex;justify-content:space-between;gap:.6rem}
+    .price{color:var(--accent);font-weight:800;white-space:nowrap}
+    .item p{color:var(--muted);font-size:.93rem;margin-top:.2rem}
+    .note{color:var(--muted);font-size:.85rem;margin-top:1.2rem}
+    .empty{color:var(--muted);margin-top:.5rem}
+
+    /* Über uns */
+    .why{display:grid;gap:.9rem;margin-top:1.4rem;list-style:none}
+    .why li{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.1rem}
+    .why strong{display:block;margin-bottom:.2rem;color:var(--accent)}
+    .why span{color:var(--muted);font-size:.95rem}
+
+    /* Bewertungen */
+    #bewertungen{background:var(--bg2)}
+    .rating{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1.3rem}
+    .score{font-size:2.6rem;font-weight:900;color:var(--accent)}
+    .stars{color:var(--accent);letter-spacing:.1em;font-size:1.2rem}
+    .reviews{display:grid;gap:.9rem}
+    figure.rev{background:var(--card);border:1px dashed var(--line);border-radius:16px;padding:1.1rem}
+    figure.rev blockquote{font-size:1rem}
+    figure.rev figcaption{color:var(--muted);font-size:.88rem;margin-top:.6rem}
+
+    /* Kontakt */
+    .contact{display:grid;gap:1.2rem}
+    .box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.2rem}
+    .box h3{margin-bottom:.6rem}
+    .hours{width:100%;border-collapse:collapse}
+    .hours th,.hours td{text-align:left;padding:.35rem 0;border-bottom:1px solid var(--line);font-weight:500}
+    .hours td{text-align:right}
+    .hours tr.today th,.hours tr.today td{color:var(--accent);font-weight:800}
+    address{font-style:normal}
+    .map{margin-top:1.2rem;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card);min-height:280px;display:flex;align-items:center;justify-content:center;text-align:center;padding:1.2rem}
+    .map iframe{width:100%;height:320px;border:0;display:block}
+    .map-actions{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:.8rem}
+
+    footer{border-top:1px solid var(--line);padding:2rem 0 6rem;color:var(--muted);font-size:.92rem}
+    footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin:.8rem 0}
+    .linkbtn{background:none;border:0;color:var(--text);text-decoration:underline;cursor:pointer;font:inherit;padding:.4rem 0;min-height:44px}
+    .admin-link{color:var(--muted);font-size:.8rem;opacity:.3;min-height:32px;width:32px;padding:0;text-decoration:none}
+    .admin-link:hover,.admin-link:focus-visible{opacity:1}
+
+    /* Feste Anruf-Leiste (mobil) */
+    .callbar{position:fixed;left:0;right:0;bottom:0;z-index:90;padding:.6rem 1rem calc(.6rem + env(safe-area-inset-bottom));background:rgba(20,16,13,.97);border-top:1px solid var(--line)}
+    .callbar .btn{width:100%}
+
+    /* Cookie-Banner */
+    #consent{position:fixed;left:.7rem;right:.7rem;bottom:.7rem;z-index:150;background:var(--bg2);border:1px solid var(--accent);border-radius:16px;padding:1rem;max-width:560px;margin:0 auto;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+    #consent[hidden]{display:none}
+    #consent p{font-size:.92rem;color:var(--muted);margin:.4rem 0 .8rem}
+    #consent .row{display:flex;gap:.6rem;flex-wrap:wrap}
+    #consent .btn{flex:1 1 180px;background:var(--card);color:var(--text);border-color:var(--text)}
+
+    /* Dialoge */
+    dialog{margin:auto;max-width:720px;width:calc(100% - 1.6rem);max-height:86vh;overflow:auto;background:var(--bg2);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:1.4rem}
+    dialog::backdrop{background:rgba(0,0,0,.75)}
+    dialog h2{font-size:1.5rem}
+    dialog h3{margin:1.1rem 0 .3rem;font-size:1.05rem;color:var(--accent)}
+    dialog p,dialog li{color:var(--muted);font-size:.95rem}
+    dialog ul{padding-left:1.2rem}
+    dialog .btn{margin-top:1.2rem}
+
+    /* Admin-Formulare */
+    dialog label{display:block;margin:.9rem 0 .3rem;font-weight:700;color:var(--text);font-size:.95rem}
+    dialog input,dialog textarea,dialog select{width:100%;min-height:48px;padding:.6rem .8rem;border-radius:10px;border:1px solid #8a7560;background:var(--card);color:var(--text);font:inherit;font-size:1rem}
+    dialog textarea{min-height:90px;resize:vertical}
+    dialog .row{display:flex;gap:.6rem;flex-wrap:wrap}
+    .err{color:#ff8a80;margin-top:.6rem}
+    .ok{color:#7be29b;margin-top:.6rem}
+    .err[hidden],.ok[hidden]{display:none}
+    .adm-list{list-style:none;padding:0;margin-top:.5rem}
+    .adm-list li{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--line)}
+    .adm-list .nm{color:var(--text);font-weight:700;display:block}
+    .adm-list .mt{color:var(--muted);font-size:.85rem}
+    .adm-list .btn{margin-top:0;flex:0 0 auto}
+
+    @media (min-width:760px){
+      section{padding:5rem 0}
+      h2{font-size:2.3rem}
+      .hero h1{font-size:3.6rem}
+      .cta{flex-direction:row}
+      nav ul{display:flex;gap:1.2rem}
+      .burger{display:none}
+      .grid{grid-template-columns:1fr 1fr}
+      .why{grid-template-columns:repeat(3,1fr)}
+      .reviews{grid-template-columns:repeat(3,1fr)}
+      .contact{grid-template-columns:1fr 1fr}
+      .callbar{display:none}
+      footer{padding-bottom:2rem}
+      #consent{left:auto;right:1rem;bottom:1rem;margin:0}
+    }
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+
+  <header>
+    <div class="wrap bar">
+      <a href="#top" class="logo" aria-label="Kebap Haus Bogen – Startseite">KEBAP HAUS <span>BOGEN</span></a>
+      <nav id="nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#menue">Menü</a></li>
+          <li><a href="#ueber-uns">Über uns</a></li>
+          <li><a href="#bewertungen">Bewertungen</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="head-actions">
+        <a class="btn btn-primary" href="tel:+49000000000">📞 Jetzt anrufen</a>
+        <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="inhalt">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <p class="eyebrow">Stadtplatz 27 · Bogen</p>
+        <h1>Der Kebab in Bogen – <em>frisch, saftig, lecker.</em></h1>
+        <p>Knuspriges Fladenbrot, zartes Fleisch und knackiges Gemüse – täglich frisch zubereitet. Einfach anrufen, vorbestellen und abholen.</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="tel:+49000000000">📞 Jetzt vorbestellen</a>
+          <a class="btn btn-ghost" href="#menue">Speisekarte ansehen</a>
+        </div>
+        <div class="status" id="status" role="status"><span class="dot" aria-hidden="true"></span><span id="status-text">Öffnungszeiten werden geprüft …</span></div>
+        <ul class="badges">
+          <li>Täglich frisch</li><li>Schnelle Zubereitung</li><li>Abholung &amp; Vorbestellung</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MENÜ -->
+    <section id="menue">
+      <div class="wrap">
+        <p class="eyebrow">Speisekarte</p>
+        <h2>Unsere Klassiker</h2>
+        <p class="lead">Alle Gerichte frisch für Sie zubereitet. Telefonisch vorbestellen und ohne Wartezeit abholen.</p>
+
+        <div class="tabs" role="group" aria-label="Kategorie filtern">
+          <button class="tab" data-f="alle" aria-pressed="true">Alle</button>
+          <button class="tab" data-f="doener" aria-pressed="false">Döner &amp; Dürüm</button>
+          <button class="tab" data-f="pizza" aria-pressed="false">Pizza &amp; Lahmacun</button>
+          <button class="tab" data-f="veggie" aria-pressed="false">Falafel &amp; Salate</button>
+          <button class="tab" data-f="drinks" aria-pressed="false">Getränke</button>
+        </div>
+
+        <!-- Wird per JavaScript aus dem Menü-Array / localStorage befüllt -->
+        <div class="grid" id="grid" aria-live="polite"></div>
+        <p class="empty" id="empty" hidden>In dieser Kategorie gibt es aktuell keine Gerichte.</p>
+
+        <p class="note">Alle Preise in Euro inkl. MwSt. Informationen zu Allergenen und Zusatzstoffen erhalten Sie auf Anfrage im Laden oder telefonisch.</p>
+      </div>
+    </section>
+
+    <!-- ÜBER UNS -->
+    <section id="ueber-uns">
+      <div class="wrap">
+        <p class="eyebrow">Über uns</p>
+        <h2>Warum Kebap Haus Bogen?</h2>
+        <p class="lead">Bei uns steht gutes Essen im Mittelpunkt, ohne Schnickschnack, aber mit Liebe zum Detail.</p>
+        <ul class="why">
+          <li><strong>🥬 Frische Zutaten</strong><span>Salat und Gemüse kommen frisch in die Küche. Brot und Teig bereiten wir täglich vor.</span></li>
+          <li><strong>⭐ Ehrliche Qualität</strong><span>Saftiges Fleisch, kräftige Gewürze und Saucen, die richtig schmecken.</span></li>
+          <li><strong>⚡ Schnell zubereitet</strong><span>Vorbestellen, abholen, genießen – ohne lange Wartezeit.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- BEWERTUNGEN -->
+    <section id="bewertungen">
+      <div class="wrap">
+        <p class="eyebrow">Google Bewertungen</p>
+        <h2>Das sagen unsere Gäste</h2>
+        <div class="rating">
+          <!-- TODO: Echte Google-Note und Anzahl eintragen, z. B. 4,6 und 123 Bewertungen -->
+          <span class="score">[X,X]</span>
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span>bei Google ([Anzahl] Bewertungen)</span>
+        </div>
+        <div class="reviews">
+          <!-- TODO: Nur echte Bewertungen einfügen (Name erst nach Erlaubnis bzw. wie bei Google öffentlich) -->
+          <figure class="rev"><blockquote>„[Echte Kundenbewertung 1 hier einfügen]“</blockquote><figcaption>[Name] · Google-Bewertung · ★★★★★</figcaption></figure>
+          <figure class="rev"><blockquote>„[Echte Kundenbewertung 2 hier einfügen]“</blockquote><figcaption>[Name] · Google-Bewertung · ★★★★★</figcaption></figure>
+          <figure class="rev"><blockquote>„[Echte Kundenbewertung 3 hier einfügen]“</blockquote><figcaption>[Name] · Google-Bewertung · ★★★★☆</figcaption></figure>
+        </div>
+        <p class="note"><a href="https://www.google.com/maps/search/?api=1&query=Kebap+Haus+Bogen+Stadtpl.+27+94327+Bogen" target="_blank" rel="noopener noreferrer">Alle Bewertungen bei Google ansehen (öffnet in neuem Tab)</a></p>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt">
+      <div class="wrap">
+        <p class="eyebrow">Kontakt &amp; Öffnungszeiten</p>
+        <h2>Besuchen Sie uns</h2>
+        <div class="contact">
+          <div class="box">
+            <h3>Adresse</h3>
+            <address>Kebap Haus Bogen<br>Stadtpl. 27<br>94327 Bogen</address>
+            <h3 style="margin-top:1rem">Vorbestellung</h3>
+            <p><a href="tel:+49000000000" style="font-size:1.3rem;font-weight:800;color:var(--accent)">+49 (0) 000 000000</a></p>
+          </div>
+          <div class="box">
+            <h3>Öffnungszeiten</h3>
+            <table class="hours" id="hours">
+              <caption class="sr" style="position:absolute;left:-999px">Öffnungszeiten</caption>
+              <tbody>
+                <tr data-d="1"><th scope="row">Montag</th><td>10:00 – 21:00 Uhr</td></tr>
+                <tr data-d="2"><th scope="row">Dienstag</th><td>10:00 – 21:00 Uhr</td></tr>
+                <tr data-d="3"><th scope="row">Mittwoch</th><td>10:00 – 21:00 Uhr</td></tr>
+                <tr data-d="4"><th scope="row">Donnerstag</th><td>10:00 – 21:00 Uhr</td></tr>
+                <tr data-d="5"><th scope="row">Freitag</th><td>10:00 – 21:00 Uhr</td></tr>
+                <tr data-d="6"><th scope="row">Samstag</th><td>10:00 – 21:00 Uhr</td></tr>
+                <tr data-d="0"><th scope="row">Sonntag</th><td>10:00 – 21:00 Uhr</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="map" id="map">
+          <div id="map-placeholder">
+            <p style="margin-bottom:.8rem">Die Karte wird von Google Maps bereitgestellt. Beim Laden werden Daten (z. B. Ihre IP-Adresse) an Google übertragen.</p>
+            <button class="btn btn-primary" id="load-map" type="button">🗺️ Karte laden</button>
+          </div>
+        </div>
+        <div class="map-actions">
+          <a class="btn btn-ghost" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/dir/?api=1&destination=Stadtpl.+27,+94327+Bogen">📍 Route planen (Google Maps)</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>Kebap Haus Bogen</strong> · Stadtpl. 27 · 94327 Bogen
+      <ul>
+        <li><button class="linkbtn" data-open="d-impressum">Impressum</button></li>
+        <li><button class="linkbtn" data-open="d-datenschutz">Datenschutz</button></li>
+        <li><button class="linkbtn" data-open="d-nutzung">Nutzungsbedingungen &amp; Erstattung</button></li>
+        <li><button class="linkbtn" id="reopen-consent">Cookie-Einstellungen</button></li>
+        <li><button class="linkbtn admin-link" id="admin-open" type="button" aria-label="Admin-Verwaltung öffnen" title="Admin-Verwaltung">⚙</button></li>
+      </ul>
+      <p>© <span id="year"></span> Kebap Haus Bogen. Alle Rechte vorbehalten.</p>
+    </div>
+  </footer>
+
+  <div class="callbar"><a class="btn btn-primary" href="tel:+49000000000">📞 Jetzt anrufen &amp; vorbestellen</a></div>
+
+  <!-- Cookie-/Einwilligungs-Banner -->
+  <div id="consent" role="dialog" aria-labelledby="consent-title" aria-modal="false" hidden>
+    <strong id="consent-title">Datenschutz &amp; externe Inhalte</strong>
+    <p>Diese Website setzt keine Tracking- oder Werbe-Cookies ein. Mit Ihrer Einwilligung laden wir externe Inhalte (Google Maps). Mehr dazu in der <button class="linkbtn" data-open="d-datenschutz" style="min-height:0;padding:0">Datenschutzerklärung</button>.</p>
+    <div class="row">
+      <button class="btn" id="consent-no" type="button">Nur notwendige</button>
+      <button class="btn" id="consent-yes" type="button">Externe Inhalte erlauben</button>
+    </div>
+  </div>
+
+  <!-- Admin-Login -->
+  <dialog id="d-login" aria-labelledby="t-login">
+    <h2 id="t-login">Admin-Login</h2>
+    <p class="note">Demo-Zugang: Passwort und Prüfung sind im Browsercode sichtbar. Für echte Zugriffssicherheit ist eine serverseitige Anmeldung erforderlich.</p>
+    <form id="login-form" novalidate>
+      <label for="pw">Passwort</label>
+      <input id="pw" type="password" autocomplete="current-password" required>
+      <p class="err" id="login-err" role="alert" hidden>Falsches Passwort.</p>
+      <div class="row">
+        <button class="btn btn-primary" type="submit">Anmelden</button>
+        <button class="btn btn-ghost" type="button" data-close>Abbrechen</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Admin-Verwaltung -->
+  <dialog id="d-admin" aria-labelledby="t-admin">
+    <h2 id="t-admin">Speisekarte verwalten</h2>
+    <p>Änderungen werden im Browser auf diesem Gerät gespeichert und sofort auf der Seite angezeigt.</p>
+    <p class="err" id="admin-storage-error" role="alert" hidden></p>
+
+    <h3>Neues Gericht hinzufügen</h3>
+    <form id="add-form" novalidate>
+      <label for="a-name">Name</label>
+      <input id="a-name" type="text" maxlength="60" required>
+      <label for="a-desc">Beschreibung</label>
+      <textarea id="a-desc" maxlength="160"></textarea>
+      <label for="a-price">Preis in €</label>
+      <input id="a-price" type="text" inputmode="decimal" placeholder="z. B. 7,50" required>
+      <label for="a-cat">Kategorie</label>
+      <select id="a-cat">
+        <option value="doener">Döner &amp; Dürüm</option>
+        <option value="pizza">Pizza &amp; Lahmacun</option>
+        <option value="veggie">Falafel &amp; Salate</option>
+        <option value="drinks">Getränke</option>
+      </select>
+      <p class="err" id="add-err" role="alert" hidden></p>
+      <p class="ok" id="add-ok" role="status" hidden></p>
+      <button class="btn btn-primary" type="submit">Gericht hinzufügen</button>
+    </form>
+
+    <h3>Aktuelle Gerichte</h3>
+    <ul class="adm-list" id="adm-list"></ul>
+
+    <div class="row">
+      <button class="btn btn-ghost" type="button" id="adm-reset">Standard-Speisekarte wiederherstellen</button>
+      <button class="btn btn-ghost" type="button" id="adm-logout">Abmelden</button>
+      <button class="btn btn-primary" type="button" data-close>Schließen</button>
+    </div>
+  </dialog>
+
+  <!-- Impressum -->
+  <dialog id="d-impressum" aria-labelledby="t-imp">
+    <h2 id="t-imp">Impressum</h2>
+    <h3>Angaben gemäß § 5 DDG</h3>
+    <p>[Name des Betreibers / Firma, Rechtsform]<br>Stadtpl. 27<br>94327 Bogen</p>
+    <h3>Vertreten durch</h3><p>[Name des Inhabers / Geschäftsführers]</p>
+    <h3>Kontakt</h3><p>Telefon: [Telefonnummer]<br>E-Mail: [E-Mail-Adresse]</p>
+    <h3>Umsatzsteuer-ID</h3><p>[USt-IdNr. gemäß § 27a UStG, falls vorhanden]</p>
+    <h3>Zuständige Behörde / Aufsicht</h3><p>[Zuständiges Gewerbe- bzw. Lebensmittelaufsichtsamt]</p>
+    <h3>Verbraucherstreitbeilegung</h3><p>Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+    <button class="btn btn-primary" data-close>Schließen</button>
+  </dialog>
+
+  <!-- Datenschutz -->
+  <dialog id="d-datenschutz" aria-labelledby="t-ds">
+    <h2 id="t-ds">Datenschutzerklärung</h2>
+    <h3>1. Verantwortlicher</h3>
+    <p>[Name / Firma], Stadtpl. 27, 94327 Bogen, E-Mail: [E-Mail-Adresse]</p>
+    <h3>2. Hosting und Server-Logfiles</h3>
+    <p>Beim Aufruf dieser Seite verarbeitet unser Hosting-Anbieter (Netlify, Inc., USA) technisch notwendige Daten wie IP-Adresse, Datum, Uhrzeit und aufgerufene Seite, um die Seite bereitzustellen und abzusichern (Art. 6 Abs. 1 lit. f DSGVO). [Auftragsverarbeitungsvertrag mit Netlify abschließen.]</p>
+    <h3>3. Cookies und lokale Speicherung</h3>
+    <p>Wir verwenden keine Tracking-, Analyse- oder Werbe-Cookies. Ihre Auswahl im Einwilligungs-Banner speichern wir ausschließlich lokal in Ihrem Browser (localStorage), damit wir Sie nicht erneut fragen müssen. Sie können sie jederzeit über „Cookie-Einstellungen“ im Footer ändern. Im Browser des Betreibers wird zudem die Speisekarte (Gerichte und Preise, keine personenbezogenen Daten) lokal gespeichert, sobald sie im Verwaltungsbereich geändert wird. Bei Besuchern wird dafür nichts gespeichert.</p>
+    <h3>4. Google Maps (nur mit Einwilligung)</h3>
+    <p>Wenn Sie die Karte laden, werden Daten (u. a. IP-Adresse) an Google Ireland Limited bzw. Google LLC übertragen. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 TDDDG). Sie können sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+    <h3>5. Drittanbieter-SDKs und -Dienste</h3>
+    <p>Wir setzen keine Analyse-, Werbe- oder Social-Media-SDKs ein. Schriftarten sind Systemschriften und werden nicht von externen Servern geladen. Externe Dienste: nur Hosting (Netlify) und, nach Einwilligung, Google Maps.</p>
+    <h3>6. Kontakt per Telefon oder E-Mail</h3>
+    <p>Bei Vorbestellungen oder Anfragen verarbeiten wir die von Ihnen mitgeteilten Daten (z. B. Name, Telefonnummer, Bestellung) zur Abwicklung (Art. 6 Abs. 1 lit. b DSGVO) und löschen sie, sobald sie nicht mehr erforderlich sind und keine Aufbewahrungspflichten bestehen.</p>
+    <h3>7. Kinder und Jugendliche, Newsletter</h3>
+    <p>Wir erheben über diese Website keine personenbezogenen Daten von Kindern und bieten keinen Newsletter oder E-Mail-Verteiler an. Personen unter 16 Jahren sollten nur mit Zustimmung der Eltern Daten an uns übermitteln.</p>
+    <h3>8. Ihre Rechte, inkl. Löschung</h3>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, <strong>Löschung</strong>, Einschränkung, Datenübertragbarkeit und Widerspruch. Eine Anfrage zur Datenlöschung senden Sie bitte an [E-Mail-Adresse] mit dem Betreff „Löschanfrage“; wir bearbeiten sie unverzüglich, spätestens innerhalb eines Monats.</p>
+    <h3>9. Beschwerderecht</h3>
+    <p>Zuständige Aufsichtsbehörde: Bayerisches Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach.</p>
+    <button class="btn btn-primary" data-close>Schließen</button>
+  </dialog>
+
+  <!-- Nutzungsbedingungen & Erstattung -->
+  <dialog id="d-nutzung" aria-labelledby="t-nb">
+    <h2 id="t-nb">Nutzungsbedingungen &amp; Erstattung</h2>
+    <h3>Nutzung der Website</h3>
+    <p>Diese Website dient der Information über Speisekarte, Öffnungszeiten und Kontakt. Es gibt keinen Online-Shop und keine Online-Bezahlung. Für Richtigkeit und Aktualität der Angaben (insbesondere Preise und Öffnungszeiten) übernehmen wir keine Gewähr; maßgeblich sind die Preise im Laden.</p>
+    <h3>Vorbestellung</h3>
+    <p>Vorbestellungen erfolgen telefonisch. Der Kaufvertrag kommt bei Abholung bzw. bei Bestätigung durch uns zustande. Bezahlt wird vor Ort.</p>
+    <h3>Reklamation und Erstattung</h3>
+    <p>Sind Sie mit einem Gericht nicht zufrieden, melden Sie sich bitte sofort bei uns. Wir ersetzen die Speise oder erstatten den Kaufpreis, wenn der Mangel berechtigt ist. Für frisch zubereitete Speisen besteht kein gesetzliches Widerrufsrecht bei Fernabsatz (§ 312g Abs. 2 Nr. 2 BGB).</p>
+    <button class="btn btn-primary" data-close>Schließen</button>
+  </dialog>
+
+  <script>
+    // Jahr
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile-Menü
+    const nav = document.getElementById('nav'), burger = document.getElementById('burger');
+    burger.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open);
+      burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open'); burger.setAttribute('aria-expanded', false);
+    }));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('open')) { nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); burger.focus(); }
+    });
+
+    // ===== Speisekarte: dynamisch aus Array / localStorage =====
+    const ADMIN_PW = 'admin123';
+    const MENU_KEY = 'kebap-menu';
+    const CATS  = { doener:'Döner & Dürüm', pizza:'Pizza & Lahmacun', veggie:'Falafel & Salate', drinks:'Getränke' };
+    const ICONS = { doener:'🥙', pizza:'🍕', veggie:'🥗', drinks:'🥤' };
+    const eur = new Intl.NumberFormat('de-DE', { style:'currency', currency:'EUR' });
+
+    const DEFAULT_MENU = [
+      { id:'d1',  name:'Döner Kebap',         desc:'Im Fladenbrot mit Fleisch, Salat, Tomaten, Zwiebeln und Sauce nach Wahl.', price:7.5,  cat:'doener', icon:'🥙' },
+      { id:'d2',  name:'Dürüm Döner',         desc:'Im dünnen Yufka-Teig gerollt, saftig gefüllt und leicht angeröstet.',        price:8,    cat:'doener', icon:'🌯' },
+      { id:'d3',  name:'Döner-Teller',        desc:'Mit Pommes oder Reis, Salat und Sauce. Sättigend und beliebt.',             price:11.5, cat:'doener', icon:'🍽️' },
+      { id:'p1',  name:'Pizza Margherita',    desc:'Tomatensauce und Käse auf knusprigem Teig aus dem Steinofen.',              price:7.5,  cat:'pizza',  icon:'🍕' },
+      { id:'p2',  name:'Pizza Döner',         desc:'Mit Dönerfleisch, Zwiebeln und Peperoni, reichlich Käse.',                  price:9.5,  cat:'pizza',  icon:'🍕' },
+      { id:'p3',  name:'Lahmacun',            desc:'Türkische Pizza mit würziger Hackfleischmasse, dazu Zitrone und Salat.',    price:5.5,  cat:'pizza',  icon:'🫓' },
+      { id:'p4',  name:'Lahmacun Spezial',    desc:'Mit Salat, Zwiebeln und Joghurtsauce gerollt.',                             price:7,    cat:'pizza',  icon:'🫓' },
+      { id:'v1',  name:'Falafel Dürüm',       desc:'Vegetarisch: knusprige Falafel, Hummus, Salat und Sauce.',                  price:7.5,  cat:'veggie', icon:'🧆' },
+      { id:'v2',  name:'Falafel-Teller',      desc:'Falafel mit Reis oder Pommes, Salat und Hummus.',                           price:10.5, cat:'veggie', icon:'🧆' },
+      { id:'v3',  name:'Gemischter Salat',    desc:'Frischer Salat mit Tomaten, Gurken, Zwiebeln und Hausdressing.',            price:6.5,  cat:'veggie', icon:'🥗' },
+      { id:'v4',  name:'Hirtensalat',         desc:'Mit Schafskäse, Oliven und Peperoni.',                                      price:7.5,  cat:'veggie', icon:'🥗' },
+      { id:'g1',  name:'Softdrinks 0,33 l',   desc:'Verschiedene Sorten, gut gekühlt.',                                         price:2.5,  cat:'drinks', icon:'🥤' },
+      { id:'g2',  name:'Ayran',               desc:'Das klassische türkische Joghurtgetränk.',                                  price:2,    cat:'drinks', icon:'🥛' },
+      { id:'g3',  name:'Mineralwasser 0,5 l', desc:'Still oder mit Kohlensäure.',                                               price:2,    cat:'drinks', icon:'💧' }
+    ];
+
+    function cloneDefault(){ return DEFAULT_MENU.map(x => Object.assign({}, x)); }
+    let menuLoadError = '';
+    function loadMenu(){
+      try {
+        const raw = localStorage.getItem(MENU_KEY);
+        if (!raw) return cloneDefault();
+        const data = JSON.parse(raw);
+        if (!Array.isArray(data) || data.some(x =>
+          !x || typeof x.id !== 'string' || typeof x.name !== 'string' ||
+          typeof x.desc !== 'string' || typeof x.price !== 'number' ||
+          !Number.isFinite(x.price) || !CATS[x.cat]
+        )) throw new Error('Ungültige Menü-Daten');
+        return data;
+      } catch (e) {
+        menuLoadError = 'Die gespeicherte Speisekarte konnte nicht gelesen werden. Es wird vorübergehend die Standardkarte angezeigt.';
+        console.error('Speisekarte konnte nicht aus localStorage geladen werden.', e);
+      }
+      return cloneDefault();
+    }
+    function saveMenu(nextMenu){
+      try {
+        localStorage.setItem(MENU_KEY, JSON.stringify(nextMenu));
+        menu = nextMenu;
+        menuLoadError = '';
+        return true;
+      } catch (e) {
+        console.error('Speisekarte konnte nicht in localStorage gespeichert werden.', e);
+        return false;
+      }
+    }
+
+    let menu = loadMenu(), filter = 'alle', isAdmin = false;
+    const grid = document.getElementById('grid'), emptyMsg = document.getElementById('empty');
+
+    function renderMenu(){
+      grid.textContent = '';
+      const list = menu.filter(i => filter === 'alle' || i.cat === filter);
+      list.forEach(i => {
+        const art = document.createElement('article'); art.className = 'item';
+        const ico = document.createElement('span'); ico.className = 'ico'; ico.setAttribute('aria-hidden','true'); ico.textContent = i.icon || ICONS[i.cat];
+        const box = document.createElement('div');
+        const h3 = document.createElement('h3');
+        h3.appendChild(document.createTextNode(i.name + ' '));
+        const pr = document.createElement('span'); pr.className = 'price'; pr.textContent = eur.format(i.price);
+        h3.appendChild(pr);
+        box.appendChild(h3);
+        if (i.desc) { const p = document.createElement('p'); p.textContent = i.desc; box.appendChild(p); }
+        art.appendChild(ico); art.appendChild(box);
+        grid.appendChild(art);
+      });
+      emptyMsg.hidden = list.length > 0;
+    }
+
+    // Menü-Filter
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(t => t.addEventListener('click', () => {
+      filter = t.dataset.f;
+      tabs.forEach(x => x.setAttribute('aria-pressed', x === t));
+      renderMenu();
+    }));
+    renderMenu();
+
+    // Änderungen aus einem anderen Tab desselben Browsers übernehmen
+    window.addEventListener('storage', e => {
+      if (e.key === MENU_KEY || e.key === null) {
+        menu = loadMenu();
+        renderMenu();
+        if (dAdmin?.open) {
+          showMenuStorageError(menuLoadError);
+          renderAdmin();
+        }
+      }
+    });
+
+    // ===== Admin-Bereich =====
+    const dLogin = document.getElementById('d-login'), dAdmin = document.getElementById('d-admin');
+    const loginForm = document.getElementById('login-form'), loginErr = document.getElementById('login-err');
+    const addForm = document.getElementById('add-form'), addErr = document.getElementById('add-err'), addOk = document.getElementById('add-ok');
+    const admList = document.getElementById('adm-list');
+
+    function renderAdmin(){
+      admList.textContent = '';
+      if (!menu.length) {
+        const li = document.createElement('li'); li.textContent = 'Keine Gerichte vorhanden.'; admList.appendChild(li); return;
+      }
+      menu.forEach(i => {
+        const li = document.createElement('li');
+        const info = document.createElement('span');
+        const nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = i.name;
+        const mt = document.createElement('span'); mt.className = 'mt'; mt.textContent = eur.format(i.price) + ' · ' + CATS[i.cat];
+        info.appendChild(nm); info.appendChild(mt);
+        const del = document.createElement('button');
+        del.type = 'button'; del.className = 'btn btn-danger'; del.textContent = 'Löschen';
+        del.setAttribute('aria-label', i.name + ' löschen');
+        del.addEventListener('click', () => {
+          if (!confirm('„' + i.name + '“ wirklich löschen?')) return;
+          const nextMenu = menu.filter(x => x.id !== i.id);
+          if (!saveMenu(nextMenu)) {
+            showMenuStorageError('Das Gericht konnte nicht gelöscht werden. Bitte prüfen Sie die Speichereinstellungen Ihres Browsers.');
+            return;
+          }
+          showMenuStorageError('');
+          renderMenu(); renderAdmin();
+        });
+        li.appendChild(info); li.appendChild(del);
+        admList.appendChild(li);
+      });
+    }
+
+    function openAdmin(){
+      addErr.hidden = true; addOk.hidden = true;
+      showMenuStorageError(menuLoadError);
+      renderAdmin(); dAdmin.showModal();
+    }
+
+    const adminStorageError = document.getElementById('admin-storage-error');
+    function showMenuStorageError(message){
+      adminStorageError.textContent = message;
+      adminStorageError.hidden = !message;
+    }
+
+    document.getElementById('admin-open').addEventListener('click', () => {
+      if (isAdmin) { openAdmin(); }
+      else { loginForm.reset(); loginErr.hidden = true; dLogin.showModal(); }
+    });
+
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      if (document.getElementById('pw').value === ADMIN_PW) {
+        isAdmin = true; loginForm.reset(); dLogin.close(); openAdmin();
+      } else {
+        loginErr.hidden = false;
+        document.getElementById('pw').select();
+      }
+    });
+
+    addForm.addEventListener('submit', e => {
+      e.preventDefault();
+      addErr.hidden = true; addOk.hidden = true;
+      const name = document.getElementById('a-name').value.trim();
+      const desc = document.getElementById('a-desc').value.trim();
+      const cat  = document.getElementById('a-cat').value;
+      const raw  = document.getElementById('a-price').value.trim().replace(/\s?€/, '').replace(',', '.');
+      const price = Number(raw);
+      let msg = '';
+      if (name.length < 2) msg = 'Bitte einen Namen mit mindestens 2 Zeichen eingeben.';
+      else if (!raw || !isFinite(price) || price < 0 || price > 999) msg = 'Bitte einen gültigen Preis eingeben, z. B. 7,50.';
+      else if (!CATS[cat]) msg = 'Bitte eine Kategorie wählen.';
+      if (msg) { addErr.textContent = msg; addErr.hidden = false; return; }
+
+      const newItem = {
+        id: 'n' + Date.now() + Math.random().toString(36).slice(2, 6),
+        name: name, desc: desc, price: Math.round(price * 100) / 100, cat: cat, icon: ICONS[cat]
+      };
+      if (!saveMenu([...menu, newItem])) {
+        addErr.textContent = 'Speichern im Browser nicht möglich (z. B. Privatmodus oder blockierter Speicher).';
+        addErr.hidden = false;
+        return;
+      }
+      showMenuStorageError('');
+      renderMenu(); renderAdmin();
+      addForm.reset();
+      addOk.textContent = '„' + newItem.name + '“ wurde hinzugefügt.'; addOk.hidden = false;
+    });
+
+    document.getElementById('adm-reset').addEventListener('click', () => {
+      if (!confirm('Alle Änderungen verwerfen und die Standard-Speisekarte wiederherstellen?')) return;
+      try {
+        localStorage.removeItem(MENU_KEY);
+      } catch (e) {
+        console.error('Standard-Speisekarte konnte nicht wiederhergestellt werden.', e);
+        showMenuStorageError('Die Standard-Speisekarte konnte nicht wiederhergestellt werden. Bitte prüfen Sie die Speichereinstellungen Ihres Browsers.');
+        return;
+      }
+      menu = cloneDefault(); renderMenu(); renderAdmin();
+      menuLoadError = '';
+      showMenuStorageError('');
+    });
+    document.getElementById('adm-logout').addEventListener('click', () => { isAdmin = false; dAdmin.close(); });
+
+    // ===== Öffnungszeiten (Zeitzone Europe/Berlin) – Zeiten hier anpassen =====
+    const HOURS = {0:[10,21],1:[10,21],2:[10,21],3:[10,21],4:[10,21],5:[10,21],6:[10,21]};
+    (function(){
+      const parts = new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Berlin',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+      const get = t => parts.find(p => p.type === t).value;
+      const day = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[get('weekday')];
+      const now = parseInt(get('hour'),10) + parseInt(get('minute'),10)/60;
+      const [o,c] = HOURS[day];
+      const open = now >= o && now < c;
+      const el = document.getElementById('status');
+      el.classList.add(open ? 'open' : 'closed');
+      document.getElementById('status-text').textContent = open ? 'Jetzt geöffnet · bis ' + c + ':00 Uhr' : 'Aktuell geschlossen · öffnet um ' + o + ':00 Uhr';
+      const row = document.querySelector('#hours tr[data-d="'+day+'"]'); if (row) row.classList.add('today');
+    })();
+
+    // ===== Dialoge =====
+    document.querySelectorAll('[data-open]').forEach(b => b.addEventListener('click', () => document.getElementById(b.dataset.open).showModal()));
+    document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => b.closest('dialog').close()));
+    document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
+
+    // ===== Einwilligung & Google Maps (erst nach Zustimmung laden) =====
+    const KEY = 'kebap-consent', banner = document.getElementById('consent');
+    const store = {
+      get(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } },
+      set(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+    };
+    function loadMap(){
+      const box = document.getElementById('map');
+      box.innerHTML = '<iframe title="Karte: Kebap Haus Bogen, Stadtplatz 27, 94327 Bogen" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Stadtpl.+27,+94327+Bogen&output=embed"></iframe>';
+    }
+    function decide(v){ store.set(v); banner.hidden = true; if (v === 'all') loadMap(); }
+    document.getElementById('consent-yes').addEventListener('click', () => decide('all'));
+    document.getElementById('consent-no').addEventListener('click', () => decide('essential'));
+    document.getElementById('load-map').addEventListener('click', loadMap); // einmalige Zustimmung nur für die Karte
+    document.getElementById('reopen-consent').addEventListener('click', () => { banner.hidden = false; });
+    const saved = store.get();
+    if (saved === 'all') loadMap(); else if (!saved) banner.hidden = false;
+  </script>
+</body>
+</html>
